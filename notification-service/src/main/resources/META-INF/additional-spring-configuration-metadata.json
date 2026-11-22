@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "correo.desde",
+      "type": "java.lang.String",
+      "description": "Dirección remitente de los correos de recuperación."
+    },
+    {
+      "name": "correo.token-interno",
+      "type": "java.lang.String",
+      "description": "Token para autenticar las solicitudes de envío de correo."
+    }
+  ]
+}

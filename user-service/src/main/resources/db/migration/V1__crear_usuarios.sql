@@ -1,0 +1,10 @@
+CREATE TABLE usuarios (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    correo VARCHAR(254) NOT NULL,
+    rol VARCHAR(20) NOT NULL,
+    activo BOOLEAN NOT NULL DEFAULT TRUE,
+    version BIGINT NOT NULL DEFAULT 0,
+    CONSTRAINT uk_usuarios_correo UNIQUE (correo),
+    CONSTRAINT ck_usuarios_rol CHECK (rol IN ('ADMINISTRADOR', 'SUPERVISOR', 'OBSERVADOR'))
+);

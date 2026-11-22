@@ -1,0 +1,15 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>cl.duocuc.rinconsur</groupId>
+    <artifactId>rinconsur-backend</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <modules>
+        <module>eureka-server</module>
+        <module>api-gateway</module>
+        <module>notification-service</module>
+        <module>operations-service</module>
+        <module>user-service</module>
+        <module>auth-service</module>
+    </modules>
+</project>

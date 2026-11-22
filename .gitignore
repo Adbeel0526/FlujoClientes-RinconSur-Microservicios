@@ -1,0 +1,12 @@
+**/target/
+.env
+.env.*
+!.env.example
+*.log
+*.pem
+*.key
+*.p12
+*.pfx
+__pycache__/
+.local/
+.DS_Store

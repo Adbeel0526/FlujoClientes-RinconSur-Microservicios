@@ -1,0 +1,50 @@
+spring:
+  web:
+    error:
+      include-message: never
+      include-stacktrace: never
+  cloud:
+    loadbalancer:
+      cache:
+        enabled: false
+  application:
+    name: auth-service
+  profiles:
+    default: local
+
+server:
+  address: ${SERVER_ADDRESS:127.0.0.1}
+  port: ${SERVER_PORT:8081}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+      probes:
+        enabled: true
+
+seguridad:
+  interna:
+    token: ${INTERNAL_SERVICE_TOKEN}
+
+jwt:
+  clave-publica: ${JWT_PUBLIC_KEY}
+  clave-privada: ${JWT_PRIVATE_KEY}
+  emisor: ${JWT_ISSUER:http://localhost:8081}
+  audiencia: ${JWT_AUDIENCE:rinconsur-api}
+  duracion-segundos: ${JWT_DURATION_SECONDS:900}
+
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: ${EUREKA_URL:http://127.0.0.1:8761/eureka/}
+
+springdoc:
+  paths-to-match: /api/v1/auth/**

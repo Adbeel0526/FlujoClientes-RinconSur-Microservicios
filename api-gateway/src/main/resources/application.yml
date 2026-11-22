@@ -1,0 +1,87 @@
+spring:
+  web:
+    error:
+      include-message: never
+      include-stacktrace: never
+  application:
+    name: api-gateway
+  cloud:
+    loadbalancer:
+      cache:
+        enabled: false
+    gateway:
+      server:
+        webmvc:
+          routes:
+            - id: auth-login
+              uri: lb://auth-service
+              predicates:
+                - Path=/api/v1/auth/login
+                - Method=POST
+            - id: auth-me
+              uri: lb://auth-service
+              predicates:
+                - Path=/api/v1/auth/me
+                - Method=GET
+            - id: auth-cuentas
+              uri: lb://auth-service
+              predicates:
+                - Path=/api/v1/auth/perfil,/api/v1/auth/recuperacion,/api/v1/auth/contrasena,/api/v1/auth/admin/usuarios,/api/v1/auth/admin/usuarios/**
+                - Method=GET,POST,PUT
+            - id: auth-health
+              uri: lb://auth-service
+              predicates:
+                - Path=/health/services/auth
+                - Method=GET
+              filters:
+                - SetPath=/actuator/health
+            - id: users-health
+              uri: lb://user-service
+              predicates:
+                - Path=/health/services/users
+                - Method=GET
+              filters:
+                - SetPath=/actuator/health
+            - id: operations
+              uri: lb://operations-service
+              predicates:
+                - Path=/api/v1/operations/**
+            - id: operations-health
+              uri: lb://operations-service
+              predicates:
+                - Path=/health/services/operations
+                - Method=GET
+              filters:
+                - SetPath=/actuator/health
+            - id: notifications-health
+              uri: lb://notification-service
+              predicates:
+                - Path=/health/services/notifications
+                - Method=GET
+              filters:
+                - SetPath=/actuator/health
+  profiles:
+    default: local
+
+server:
+  address: ${SERVER_ADDRESS:127.0.0.1}
+  port: ${SERVER_PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+      probes:
+        enabled: true
+
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: ${EUREKA_URL:http://127.0.0.1:8761/eureka/}

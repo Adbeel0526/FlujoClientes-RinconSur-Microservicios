@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "seguridad.interna.token",
+      "type": "java.lang.String",
+      "description": "Token para autenticar las solicitudes entre servicios."
+    }
+  ]
+}

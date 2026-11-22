@@ -1,0 +1,36 @@
+spring:
+  web:
+    error:
+      include-message: never
+      include-stacktrace: never
+  application:
+    name: user-service
+  profiles:
+    default: local
+
+server:
+  address: ${SERVER_ADDRESS:127.0.0.1}
+  port: ${SERVER_PORT:8082}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+      probes:
+        enabled: true
+
+seguridad:
+  interna:
+    token: ${INTERNAL_SERVICE_TOKEN}
+
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: ${EUREKA_URL:http://127.0.0.1:8761/eureka/}

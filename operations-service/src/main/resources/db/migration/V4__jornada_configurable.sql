@@ -1,0 +1,1 @@
+-- La configuración de jornada puede ajustarse desde Administración.

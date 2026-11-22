@@ -1,0 +1,35 @@
+{
+  "properties": [
+    {
+      "name": "jwt.audiencia",
+      "type": "java.lang.String",
+      "description": "Audiencia de los tokens de acceso."
+    },
+    {
+      "name": "jwt.clave-privada",
+      "type": "java.lang.String",
+      "description": "Ubicación de la clave privada para firmar los tokens JWT."
+    },
+    {
+      "name": "jwt.clave-publica",
+      "type": "java.lang.String",
+      "description": "Ubicación de la clave pública para validar los tokens JWT."
+    },
+    {
+      "name": "jwt.duracion-segundos",
+      "type": "java.lang.Long",
+      "description": "Vigencia en segundos de los tokens de acceso.",
+      "defaultValue": 900
+    },
+    {
+      "name": "jwt.emisor",
+      "type": "java.lang.String",
+      "description": "Emisor de los tokens de acceso."
+    },
+    {
+      "name": "seguridad.interna.token",
+      "type": "java.lang.String",
+      "description": "Token para autenticar las solicitudes entre servicios."
+    }
+  ]
+}

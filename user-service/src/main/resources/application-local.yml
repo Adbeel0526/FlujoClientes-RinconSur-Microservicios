@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: ${USUARIOS_DB_URL:jdbc:mysql://127.0.0.1:${MYSQL_PORT:3306}/rinconsur_usuarios?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true}
+    username: ${USUARIOS_DB_USERNAME:${MYSQL_USER:root}}
+    password: ${USUARIOS_DB_PASSWORD:${MYSQL_PASSWORD:}}
+  jpa:
+    properties:
+      "[hibernate.jdbc.time_zone]": UTC
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+
+logging:
+  level:
+    root: INFO

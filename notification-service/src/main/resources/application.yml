@@ -1,0 +1,52 @@
+spring:
+  web:
+    error:
+      include-message: never
+      include-stacktrace: never
+  application:
+    name: notification-service
+  mail:
+    host: ${SMTP_HOST:}
+    port: ${SMTP_PORT:587}
+    username: ${SMTP_USER:}
+    password: ${SMTP_PASSWORD:}
+    default-encoding: UTF-8
+    properties:
+      "[mail.smtp.auth]": ${SMTP_AUTH:true}
+      "[mail.smtp.starttls.enable]": ${SMTP_STARTTLS:true}
+      "[mail.smtp.starttls.required]": ${SMTP_STARTTLS:true}
+      "[mail.smtp.connectiontimeout]": 4000
+      "[mail.smtp.timeout]": 4000
+      "[mail.smtp.writetimeout]": 4000
+  profiles:
+    default: local
+
+server:
+  address: ${SERVER_ADDRESS:127.0.0.1}
+  port: ${SERVER_PORT:8084}
+
+management:
+  health:
+    mail:
+      enabled: ${SMTP_HEALTH_ENABLED:false}
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+      probes:
+        enabled: true
+
+correo:
+  desde: ${SMTP_FROM:}
+  token-interno: ${INTERNAL_SERVICE_TOKEN:}
+
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: ${EUREKA_URL:http://127.0.0.1:8761/eureka/}

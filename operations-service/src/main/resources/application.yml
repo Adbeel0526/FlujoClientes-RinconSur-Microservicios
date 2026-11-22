@@ -1,0 +1,45 @@
+spring:
+  web:
+    error:
+      include-message: never
+      include-stacktrace: never
+  cloud:
+    loadbalancer:
+      cache:
+        enabled: false
+  application:
+    name: operations-service
+  profiles:
+    default: local
+
+server:
+  address: ${SERVER_ADDRESS:127.0.0.1}
+  port: ${SERVER_PORT:8083}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+      probes:
+        enabled: true
+
+identidad:
+  token: ${INTERNAL_SERVICE_TOKEN}
+
+tienda:
+  zona: ${STORE_TIME_ZONE:America/Santiago}
+
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: ${EUREKA_URL:http://127.0.0.1:8761/eureka/}
+
+springdoc:
+  paths-to-match: /api/v1/operations/**

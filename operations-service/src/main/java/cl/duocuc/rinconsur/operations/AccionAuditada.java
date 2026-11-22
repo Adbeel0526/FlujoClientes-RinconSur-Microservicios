@@ -1,0 +1,12 @@
+package cl.duocuc.rinconsur.operations;
+
+public enum AccionAuditada {
+    ACCESO_CREADO,
+    ACCESO_ACTUALIZADO,
+    CONFIGURACION_ACTUALIZADA,
+    SESION_PROGRAMADA,
+    SESION_REPROGRAMADA,
+    SESION_CANCELADA,
+    SESION_INICIADA,
+    SESION_FINALIZADA
+}

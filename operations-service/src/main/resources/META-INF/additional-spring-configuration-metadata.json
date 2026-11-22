@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "identidad.token",
+      "type": "java.lang.String",
+      "description": "Token para consultar la identidad de los usuarios entre servicios."
+    },
+    {
+      "name": "tienda.zona",
+      "type": "java.lang.String",
+      "description": "Zona horaria de las sesiones de observación."
+    }
+  ]
+}

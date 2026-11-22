@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: ${OPERACIONES_DB_URL:jdbc:mysql://127.0.0.1:${MYSQL_PORT:3306}/rinconsur_operaciones?connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true}
+    username: ${OPERACIONES_DB_USERNAME:${MYSQL_USER:root}}
+    password: ${OPERACIONES_DB_PASSWORD:${MYSQL_PASSWORD:}}
