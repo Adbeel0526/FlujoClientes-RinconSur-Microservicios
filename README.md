@@ -38,6 +38,8 @@ En el PC servidor, abre `http://127.0.0.1:8081/swagger-ui/index.html` para Auth 
 
 ## Cuenta inicial y pruebas
 
+Para crear las cuentas de demostración por rol, ejecuta *bash local/crear-usuarios-iniciales.sh* con el backend iniciado. El script pedirá la contraseña de cada cuenta nueva sin mostrarla en pantalla.
+
 Con los servicios arriba, desde `backend` en otra terminal:
 
 ```sh

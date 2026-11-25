@@ -44,17 +44,17 @@ trap 'exit 130' INT
 trap 'exit 143' TERM
 
 ejecutar() {
-    local servicio=$1 direccion=${2:-127.0.0.1}
+    local servicio=$1 puerto=$2 direccion=${3:-127.0.0.1}
     set -- -jar "$servicio/target/$servicio-0.0.1-SNAPSHOT.jar"
     if [[ -n "${JACOCO_AGENT:-}" ]]; then
         set -- "-javaagent:$JACOCO_AGENT=destfile=$servicio/target/jacoco-integracion.exec,append=false,includes=cl.duocuc.rinconsur.*" "$@"
     fi
-    SPRING_PROFILES_ACTIVE=local SERVER_ADDRESS="$direccion" \
+    SPRING_PROFILES_ACTIVE=local SERVER_ADDRESS="$direccion" SERVER_PORT="$puerto" \
         java "$@" > "$logs/$servicio.log" 2>&1 &
     procesos+=("$!")
 }
 
-ejecutar eureka-server
+ejecutar eureka-server 8761
 for ((intento=0; intento<60; intento++)); do
     if curl -fsS --max-time 2 http://127.0.0.1:8761/eureka/apps >/dev/null 2>&1; then break; fi
     if ! kill -0 "${procesos[0]}" 2>/dev/null; then
@@ -64,11 +64,11 @@ for ((intento=0; intento<60; intento++)); do
     sleep 1
 done
 curl -fsS --max-time 2 http://127.0.0.1:8761/eureka/apps >/dev/null
-ejecutar user-service
-ejecutar auth-service
-ejecutar operations-service
-ejecutar notification-service
-ejecutar api-gateway "${GATEWAY_BIND:-127.0.0.1}"
+ejecutar user-service 8082
+ejecutar auth-service 8081
+ejecutar operations-service 8083
+ejecutar notification-service 8084
+ejecutar api-gateway 8080 "${GATEWAY_BIND:-0.0.0.0}"
 echo "Iniciando servicios. Registros en $logs."
 
 comprobar_procesos() {
@@ -99,7 +99,7 @@ until listo; do
 done
 
 echo "Rincón Sur está listo. Gateway en http://127.0.0.1:8080 y Eureka en http://127.0.0.1:8761."
-if [[ "${GATEWAY_BIND:-127.0.0.1}" != 127.0.0.1 ]]; then
+if [[ "${GATEWAY_BIND:-0.0.0.0}" != 127.0.0.1 ]]; then
     echo "Desde otros PC, usa http://IP_DEL_SERVIDOR:8080/."
 fi
 echo "Pulsa Ctrl+C para detener el backend."
